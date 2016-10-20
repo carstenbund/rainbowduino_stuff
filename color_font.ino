@@ -1,4 +1,8 @@
+
+
 #include <Rainbowduino.h>
+#include "cp437_font.h"
+
 
 byte display[] = {
   0, 0, 0, 0, 0, 0, 0, 0,
@@ -51,7 +55,7 @@ void writeLetter(unsigned char ascii,unsigned int poX, unsigned int poY,  uint32
     }
     for(unsigned char i=0;i<8;i++)
     {
-        unsigned char temp = pgm_read_byte(&simpleFont[ascii-0x20][i]);
+        unsigned char temp = pgm_read_byte(&cp437_font[ascii-0x20][i]);
         for(unsigned char f=0;f<8;f++)
         {
             if((temp>>f)&0x01)
@@ -68,10 +72,10 @@ void loop() {
   for ( unsigned char c = 0;c < 26;c++){
     
    //unsigned char ascii[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-   unsigned char ascii[26] = {'-','*','x','*','x','-','h','a','p','p','y','h','a','l','o','w','e','e','n','-','*','x','*','x','*','#'};
+   unsigned char ascii[26] = {'*','x','*','x','-','h','a','p',' ','p','y','h','a','l','o','w','e', ' ','e','n','-','0','x','*','x','*'};
    for (unsigned char x = 0; x < 8; x++) {
 
-    unsigned char temp = pgm_read_byte(&simpleFont[ascii[c]-0x20][x]);
+    unsigned char temp = pgm_read_byte(&cp437_font[ascii[c]-0x20][x]);
     
      for (unsigned char y = 0; y < 8; y++) {
         unsigned char ofs = (y << 3) + x;
